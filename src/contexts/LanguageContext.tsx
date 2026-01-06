@@ -112,6 +112,12 @@ const translations = {
     // Buttons
     'button.toggleTheme': 'Alternar Tema',
     'button.toggleLanguage': 'Alternar Idioma',
+
+    // NotFound
+    'notFound.title': 'Página não encontrada',
+    'notFound.description': 'A página que você está procurando não existe.',
+    'notFound.attemptedPath': 'Você tentou acessar:',
+    'notFound.goBack': 'Voltar para o Início',
   },
 
   en: {
@@ -211,6 +217,12 @@ const translations = {
     // Buttons
     'button.toggleTheme': 'Toggle Theme',
     'button.toggleLanguage': 'Toggle Language',
+
+    // NotFound
+    'notFound.title': 'Page Not Found',
+    'notFound.description': 'The page you are looking for does not exist.',
+    'notFound.attemptedPath': 'You attempted to access:',
+    'notFound.goBack': 'Go Back to Home',
   },
 };
 
