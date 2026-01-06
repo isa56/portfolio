@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Atom, Moon, Sun, Sword, Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const RPGHeader = () => {
-  const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const toggleLanguage = () => {
@@ -30,7 +30,7 @@ const RPGHeader = () => {
           {/* Character Info */}
           <div className='flex items-center gap-3'>
             <div className='w-10 h-10 md:w-12 md:h-12 rounded-sm bg-primary flex items-center justify-center border-2 border-secondary'>
-              {isDark ? (
+              {theme === 'dark' ? (
                 <Atom className='w-5 h-5 md:w-6 md:h-6 text-primary-foreground' />
               ) : (
                 <Sword className='w-5 h-5 md:w-6 md:h-6 text-primary-foreground' />
@@ -77,7 +77,7 @@ const RPGHeader = () => {
               onClick={toggleTheme}
               className='w-10 h-10 rounded-sm bg-secondary text-primary-foreground flex items-center justify-center border-2 border-border hover:bg-muted transition-colors'
               aria-label={t('button.toggleTheme')}>
-              {isDark ? (
+              {theme === 'dark' ? (
                 <Sun className='w-5 h-5 text-accent' />
               ) : (
                 <Moon className='w-5 h-5 text-primary-foreground' />
