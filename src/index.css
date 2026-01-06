@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Merriweather:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 30% 95%;
+    --foreground: 25 30% 15%;
+
+    --card: 35 25% 92%;
+    --card-foreground: 25 30% 15%;
+
+    --popover: 35 25% 92%;
+    --popover-foreground: 25 30% 15%;
+
+    --primary: 120 40% 25%;
+    --primary-foreground: 35 30% 95%;
+
+    --secondary: 25 35% 25%;
+    --secondary-foreground: 35 30% 95%;
+
+    --muted: 35 20% 88%;
+    --muted-foreground: 25 20% 40%;
+
+    --accent: 38 60% 55%;
+    --accent-foreground: 25 30% 15%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 35 30% 95%;
+
+    --border: 25 25% 70%;
+    --input: 25 25% 70%;
+    --ring: 120 40% 25%;
+
+    --radius: 0.25rem;
+
+    /* RPG-specific tokens */
+    --hp-bar: 120 50% 40%;
+    --mp-bar: 220 60% 50%;
+    --xp-bar: 45 80% 50%;
+    --dialogue-border: 25 35% 25%;
+    --dialogue-inner: 25 30% 18%;
+    --glow-color: 120 40% 25%;
+
+    /* Fonts */
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-body: 'Merriweather', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  .dark {
+    --background: 220 50% 8%;
+    --foreground: 210 30% 90%;
+
+    --card: 220 45% 12%;
+    --card-foreground: 210 30% 90%;
+
+    --popover: 220 45% 12%;
+    --popover-foreground: 210 30% 90%;
+
+    --primary: 200 60% 55%;
+    --primary-foreground: 220 50% 8%;
+
+    --secondary: 220 40% 20%;
+    --secondary-foreground: 210 30% 90%;
+
+    --muted: 220 35% 18%;
+    --muted-foreground: 210 20% 60%;
+
+    --accent: 45 70% 50%;
+    --accent-foreground: 220 50% 8%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 210 30% 90%;
+
+    --border: 220 30% 25%;
+    --input: 220 30% 25%;
+    --ring: 200 60% 55%;
+
+    --dialogue-border: 200 60% 55%;
+    --dialogue-inner: 220 50% 8%;
+    --glow-color: 200 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer components {
+  /* RPG Dialogue Box */
+  .rpg-box {
+    @apply relative bg-card p-6 transition-all duration-300;
+    border: 4px solid hsl(var(--dialogue-border));
+    box-shadow: inset 0 0 0 2px hsl(var(--card)),
+      inset 0 0 0 4px hsl(var(--dialogue-inner)),
+      0 8px 32px -8px rgba(0, 0, 0, 0.3);
+  }
+
+  .rpg-box::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 2px solid hsl(var(--dialogue-border) / 0.3);
+    pointer-events: none;
+  }
+
+  /* Stat Bars */
+  .stat-bar {
+    @apply h-5 rounded-sm overflow-hidden relative;
+    background: hsl(var(--muted));
+    border: 2px solid hsl(var(--dialogue-border));
+  }
+
+  .stat-bar-fill {
+    @apply h-full transition-all duration-1000 ease-out;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--hp-bar) / 0.8) 0%,
+      hsl(var(--hp-bar)) 50%,
+      hsl(var(--hp-bar) / 0.9) 100%
+    );
+  }
+
+  .stat-bar-fill.mp {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--mp-bar) / 0.8) 0%,
+      hsl(var(--mp-bar)) 50%,
+      hsl(var(--mp-bar) / 0.9) 100%
+    );
+  }
+
+  .stat-bar-fill.xp {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--xp-bar) / 0.8) 0%,
+      hsl(var(--xp-bar)) 50%,
+      hsl(var(--xp-bar) / 0.9) 100%
+    );
+  }
+
+  /* Pixel Font Headers */
+  .pixel-text {
+    font-family: var(--font-pixel);
+    letter-spacing: 0.05em;
+  }
+
+  /* Inventory Card Glow */
+  .inventory-card {
+    @apply rpg-box cursor-pointer;
+    transition: all 0.3s ease;
+  }
+
+  .inventory-card:hover {
+    transform: translateY(-4px);
+    box-shadow: inset 0 0 0 2px hsl(var(--card)),
+      inset 0 0 0 4px hsl(var(--dialogue-inner)),
+      0 0 24px 4px hsl(var(--glow-color) / 0.4),
+      0 12px 40px -8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Skill Badge */
+  .skill-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    border-radius: 0.125rem;
+    transition: all 200ms;
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border: 2px solid hsl(var(--dialogue-border));
+  }
+
+  .skill-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px hsl(var(--glow-color) / 0.3);
+  }
+
+  .skill-badge.active {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .skill-badge.active:hover {
+    background: hsl(var(--accent));
+    border: 2px solid hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  .skill-badge.support {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  /* Timeline Quest */
+  .quest-item {
+    @apply relative pl-8 pb-8 last:pb-0;
+  }
+
+  .quest-item::before {
+    content: '';
+    @apply absolute left-2 top-2 bottom-0 w-0.5;
+    background: hsl(var(--border));
+  }
+
+  .quest-item:last-child::before {
+    display: none;
+  }
+
+  .quest-marker {
+    @apply absolute left-0 top-1 w-5 h-5 rounded-full flex items-center justify-center text-xs;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border: 2px solid hsl(var(--dialogue-border));
+  }
+
+  .quest-marker.current {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Rarity Colors */
+  .rarity-epic {
+    --glow-color: 280 60% 55%;
+    border-color: hsl(280 60% 55%);
+  }
+
+  .rarity-rare {
+    --glow-color: 200 80% 50%;
+    border-color: hsl(200 80% 50%);
+  }
+
+  .rarity-uncommon {
+    --glow-color: 120 50% 45%;
+    border-color: hsl(120 50% 45%);
+  }
+}
+
+@layer utilities {
+  /* Typewriter Animation */
+  .typewriter {
+    overflow: hidden;
+    border-right: 3px solid hsl(var(--primary));
+    white-space: nowrap;
+    animation: typing 3.5s steps(60, end), blink-caret 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: hsl(var(--primary));
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      box-shadow: 0 0 8px hsl(var(--glow-color) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 16px hsl(var(--glow-color) / 0.8);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .animation-delay-300 {
+    animation-delay: 0.3s;
+  }
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  .animation-delay-500 {
+    animation-delay: 0.5s;
+  }
+}
