@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Moon, Sun, Sword, Menu, X, Globe } from 'lucide-react';
+import { Atom, Moon, Sun, Sword, Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const RPGHeader = () => {
@@ -30,7 +30,11 @@ const RPGHeader = () => {
           {/* Character Info */}
           <div className='flex items-center gap-3'>
             <div className='w-10 h-10 md:w-12 md:h-12 rounded-sm bg-primary flex items-center justify-center border-2 border-secondary'>
-              <Sword className='w-5 h-5 md:w-6 md:h-6 text-primary-foreground' />
+              {isDark ? (
+                <Atom className='w-5 h-5 md:w-6 md:h-6 text-primary-foreground' />
+              ) : (
+                <Sword className='w-5 h-5 md:w-6 md:h-6 text-primary-foreground' />
+              )}{' '}
             </div>
             <div>
               <h1 className='font-pixel text-xs md:text-sm text-foreground'>
