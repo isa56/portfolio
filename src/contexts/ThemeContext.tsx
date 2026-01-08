@@ -44,6 +44,13 @@ export function ThemeProvider({
   }, [theme]);
 
   useEffect(() => {
+    const favicon = document.getElementById('favicon') as HTMLLinkElement | null;
+    if (favicon) {
+      favicon.href = `/favicon-${theme}.ico`;
+    }
+  }, [theme]);
+
+  useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       setTheme(mediaQuery.matches ? 'dark' : 'light');
