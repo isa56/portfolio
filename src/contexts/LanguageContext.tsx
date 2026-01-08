@@ -61,7 +61,7 @@ const translations = {
       'Criação de ferramentas de visualização de dados educacionais com Chart.js. Desenvolvimento de interfaces responsivas e acessíveis.',
     'quests.job3.title': 'Gerente & Desenvolvedora',
     'quests.job3.desc':
-      'Liderança de RH e coordenação de projetos WordPress. Mentoria de novos desenvolvedores e implementação de metodologias ágeis.',
+      'Liderança de RH e desenvolvimento de projetos WordPress. Mentoria de novos desenvolvedores e implementação de metodologias ágeis.',
 
     // Inventory
     'inventory.title': 'INVENTÁRIO',
@@ -165,7 +165,7 @@ const translations = {
       'Creation of educational data visualization tools with Chart.js. Development of responsive and accessible interfaces.',
     'quests.job3.title': 'Dev Manager & Developer',
     'quests.job3.desc':
-      'HR leadership and WordPress project coordination. Mentoring new developers and implementing agile methodologies.',
+      'HR leadership and WordPress project development. Mentoring new developers and implementing agile methodologies.',
 
     // Inventory
     'inventory.title': 'INVENTORY',
